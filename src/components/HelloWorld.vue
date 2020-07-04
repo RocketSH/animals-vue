@@ -1,6 +1,26 @@
 <template>
-  <div class="hello">
-    <pre v-text="JSON.stringify(animals, null, 2)"></pre>
+  <div class="hello container">
+    <!-- <pre v-text="JSON.stringify(animals, null, 2)"></pre> -->
+    <table class="table is-bordered is-fullwidth">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Weight (kg)</th>
+          <th>Length (cm)</th>
+          <th>Origin</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="animal in animals" v-bind:key="animal.id">
+          <td v-text="animal.id"></td>
+          <td v-text="animal.name"></td>
+          <td v-text="animal.weight"></td>
+          <td v-text="animal.length"></td>
+          <td v-text="animal.country_of_origin"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
