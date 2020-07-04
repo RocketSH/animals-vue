@@ -1,18 +1,19 @@
 <template>
   <div class="hello">
-    <pre v-text="JSON.stringify(location)"></pre>
+    <pre v-text="JSON.stringify(animals, null, 2)"></pre>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
-    location: {}
+    animals: {}
   }),
   async created() {
-    this.location = await fetch(
-      "https://api.rocketsto.re/api/geolocate"
-    ).then(res => res.json());
+    const { data } = await axios.get("http://localhost:4000/api/animals");
+    this.animals = data.data; // state
   },
   name: "HelloWorld",
   props: {
