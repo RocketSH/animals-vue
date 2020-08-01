@@ -25,20 +25,16 @@
 </template>
 
 <script>
-import axios from "axios";
+import AnimalClient from '../api/AnimalClient';
 
 export default {
   data: () => ({
-    animals: {}
+    animals: [],
   }),
   async created() {
-    const { data } = await axios.get("http://localhost:4000/api/animals");
-    this.animals = data.data; // state
+    this.animals = await AnimalClient.listAllAnimals();
   },
-  name: "HelloWorld",
-  props: {
-    msg: String
-  }
+  name: 'HelloWorld',
 };
 </script>
 
