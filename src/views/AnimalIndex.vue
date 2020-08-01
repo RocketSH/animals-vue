@@ -1,9 +1,9 @@
 <template>
   <div class="hello container">
     <!-- <pre v-text="JSON.stringify(animals, null, 2)"></pre> -->
-    <table class="table is-bordered is-fullwidth">
+    <table class="table is-bordered is-fullwidth is-hoverable">
       <thead>
-        <tr>
+        <tr class="">
           <th>ID</th>
           <th>Name</th>
           <th>Weight (kg)</th>
@@ -12,7 +12,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="animal in animals" v-bind:key="animal.id">
+        <tr
+          v-for="animal in animals"
+          v-bind:key="animal.id"
+          @click="navigate(animal.id)"
+        >
           <td v-text="animal.id"></td>
           <td v-text="animal.name"></td>
           <td v-text="animal.weight"></td>
@@ -34,12 +38,17 @@ export default {
   async created() {
     this.animals = await AnimalClient.listAllAnimals();
   },
+  methods: {
+    navigate(id) {
+      this.$router.push(`/animals/${id}`);
+    },
+  },
   name: 'HelloWorld',
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style lang="scss">
 h3 {
   margin: 40px 0 0;
 }
@@ -53,5 +62,8 @@ li {
 }
 a {
   color: #42b983;
+}
+table tbody tr {
+  cursor: pointer;
 }
 </style>
